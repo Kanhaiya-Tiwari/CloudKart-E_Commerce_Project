@@ -1,0 +1,16 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: db-migration
+  namespace: cloudkart
+spec:
+  template:
+    spec:
+      containers:
+      - name: migration
+        image: kanhaiyatiwari/cloudkart-migration:1
+        imagePullPolicy: Always
+        env:
+        - name: MONGODB_URI
+          value: "mongodb://mongodb-service:27017/cloudkart"
+      restartPolicy: OnFailure

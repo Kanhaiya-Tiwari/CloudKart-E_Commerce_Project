@@ -1,0 +1,493 @@
+{
+  "categories": {
+    "gadgets": [
+      {
+        "name": "Mobiles",
+        "img": "/icons/mobile.png",
+        "search_link": "/shops/gadgets/mobiles"
+      },
+      {
+        "name": "Laptops",
+        "img": "/icons/laptop.png",
+        "search_link": "/shops/gadgets/laptops"
+      },
+      {
+        "name": "Cameras",
+        "img": "/icons/camera.png",
+        "search_link": "/shops/gadgets/cameras"
+      },
+      {
+        "name": "Console",
+        "img": "/icons/console.png",
+        "search_link": "/shops/gadgets/console"
+      },
+      {
+        "name": "Accessories",
+        "img": "/icons/charger.png",
+        "search_link": "/shops/gadgets/accessories"
+      },
+      {
+        "name": "Headphones",
+        "img": "/icons/gadgets.png",
+        "search_link": "/shops/gadgets/headphones"
+      },
+      {
+        "name": "Routers",
+        "img": "/icons/router.png",
+        "search_link": "/shops/gadgets/routers"
+      },
+      {
+        "name": "Smart watch",
+        "img": "/icons/watch.png",
+        "search_link": "/shops/gadgets/watches"
+      },
+      {
+        "name": "Sound boxes",
+        "img": "/icons/box.png",
+        "search_link": "/shops/gadgets/soundboxes"
+      }
+    ],
+    "clothing": [
+      {
+        "name": "All",
+        "search_link": "/shops/clothing"
+      },
+      {
+        "name": "Women",
+        "search_link": "/shops/clothing/women",
+        "subcategories": [
+          {
+            "name": "Floral",
+            "search_link": "/shops/clothing/floral"
+          },
+          {
+            "name": "Tops",
+            "search_link": "/shops/clothing/tops"
+          },
+          {
+            "name": "Skirts",
+            "search_link": "/shops/clothing/skirts"
+          }
+        ]
+      },
+      {
+        "name": "Men",
+        "search_link": "/shops/clothing/men",
+        "subcategories": [
+          {
+            "name": "Hoodie",
+            "search_link": "/shops/clothing/hoodie"
+          },
+          {
+            "name": "Jackets",
+            "search_link": "/shops/clothing/jackets"
+          },
+          {
+            "name": "Blazers",
+            "search_link": "/shops/clothing/blazers"
+          },
+          {
+            "name": "Waist Coat",
+            "search_link": "/shops/clothing/waist-coat"
+          }
+        ]
+      },
+      {
+        "name": "Pants",
+        "search_link": "/shops/clothing/pants",
+        "subcategories": [
+          {
+            "name": "Jeans",
+            "search_link": "/shops/clothing/jeans"
+          },
+          {
+            "name": "Chinos",
+            "search_link": "/shops/clothing/chinos"
+          },
+          {
+            "name": "Sports",
+            "search_link": "/shops/clothing/sports"
+          }
+        ]
+      },
+      {
+        "name": "Shirts",
+        "search_link": "/shops/clothing/shirts"
+      }
+    ],
+    "bags": [
+      {
+        "name": "All",
+        "search_link": "/shops/bags"
+      },
+      {
+        "name": "Hand Bags",
+        "search_link": "/shops/bags/hand-bags"
+      },
+      {
+        "name": "Laptop Bags",
+        "search_link": "/shops/bags/laptop-bags"
+      },
+      {
+        "name": "Shoulder Bags",
+        "search_link": "/shops/bags/shoulder-bags"
+      },
+      {
+        "name": "Purse",
+        "search_link": "/shops/bags/purse"
+      },
+      {
+        "name": "Wallet",
+        "search_link": "/shops/bags/wallet"
+      }
+    ],
+    "bakery": [
+      {
+        "name": "Juice",
+        "img": "/bakeryImages/juice.png",
+        "search_link": "/shops/bakery/juice"
+      },
+      {
+        "name": "Coffee",
+        "img": "/bakeryImages/coffee.png",
+        "search_link": "/shops/bakery/coffee-tea"
+      },
+      {
+        "name": "Cookies",
+        "img": "/bakeryImages/cookies.png",
+        "search_link": "/shops/bakery/cookies"
+      },
+      {
+        "name": "Rounded Cake",
+        "img": "/bakeryImages/roundedCake.png",
+        "search_link": "/shops/bakery/rounded-cake"
+      },
+      {
+        "name": "Feeter Pies",
+        "img": "/bakeryImages/danish.png",
+        "search_link": "/shops/bakery/feeter-pies"
+      },
+      {
+        "name": "Pita Bread",
+        "img": "/bakeryImages/pitabread.png",
+        "search_link": "/shops/bakery/pita-bread"
+      },
+      {
+        "name": "Sliced Cake",
+        "img": "/bakeryImages/slicedcake.png",
+        "search_link": "/shops/bakery/sliced-cake"
+      },
+      {
+        "name": "Soft Bread",
+        "img": "/bakeryImages/softbread.png",
+        "search_link": "/shops/bakery/soft-bread"
+      },
+      {
+        "name": "Toast",
+        "img": "/bakeryImages/toast.png",
+        "search_link": "/shops/bakery/toast"
+      },
+      {
+        "name": "Croissant",
+        "img": "/bakeryImages/cross.png",
+        "search_link": "/shops/bakery/croissant"
+      }
+    ],
+    "books": [
+      {
+        "name": "All",
+        "search_link": "/shops/books"
+      },
+      {
+        "name": "Comic books",
+        "search_link": "/shops/books/comics"
+      },
+      {
+        "name": "Science Fiction",
+        "search_link": "/shops/books/science-fiction"
+      },
+      {
+        "name": "Literature",
+        "search_link": "/shops/books/literature"
+      },
+      {
+        "name": "Horror Fiction",
+        "search_link": "/shops/books/horror-fiction"
+      },
+      {
+        "name": "Novels",
+        "search_link": "/shops/books/novels"
+      },
+      {
+        "name": "Romantic Poetry",
+        "search_link": "/shops/books/romantic-poetry"
+      },
+      {
+        "name": "Thriller",
+        "search_link": "/shops/books/thiriller"
+      }
+    ],
+    "furniture": [
+      {
+        "name": "Beds",
+        "img": "/icons/bed.png",
+        "search_link": "/shops/furniture/beds"
+      },
+      {
+        "name": "Tables",
+        "img": "/icons/tables.png",
+        "search_link": "/shops/furniture/tables"
+      },
+      {
+        "name": "Sofa",
+        "img": "/icons/sofa.png",
+        "search_link": "/shops/furniture/sofa"
+      },
+      {
+        "name": "Chairs",
+        "img": "/icons/chairs.png",
+        "search_link": "/shops/furniture/chairs"
+      }
+    ],
+    "grocery": [
+      {
+        "name": "All",
+        "search_link": "/shops/grocery"
+      },
+      {
+        "name": "Fruits & Vegetables",
+        "search_link": "/shops/grocery/fruits-and-vegetables",
+        "subcategories": [
+          {
+            "name": "Fruits",
+            "search_link": "/shops/grocery/fruits"
+          },
+          {
+            "name": "Vegetables",
+            "search_link": "/shops/grocery/vegetables"
+          }
+        ]
+      },
+      {
+        "name": "Dairy & Eggs",
+        "search_link": "/shops/grocery/dairy",
+        "subcategories": [
+          {
+            "name": "Milk",
+            "search_link": "/shops/grocery/milk"
+          },
+          {
+            "name": "Butter",
+            "search_link": "/shops/grocery/butter"
+          },
+          {
+            "name": "Eggs",
+            "search_link": "/shops/grocery/eggs"
+          }
+        ]
+      },
+      {
+        "name": "Meat & Fish",
+        "search_link": "/shops/grocery/meat-and-fish",
+        "subcategories": [
+          {
+            "name": "Meat",
+            "search_link": "/shops/grocery/meat"
+          },
+          {
+            "name": "Fish",
+            "search_link": "/shops/grocery/fish"
+          }
+        ]
+      },
+      {
+        "name": "Snacks",
+        "search_link": "/shops/grocery/snacks",
+        "subcategories": [
+          {
+            "name": "Nuts & Biscuits",
+            "search_link": "/shops/grocery/nuts-and-biscuits"
+          },
+          {
+            "name": "Chocolates",
+            "search_link": "/shops/grocery/chocolates"
+          },
+          {
+            "name": "Crisps",
+            "search_link": "/shops/grocery/crisps"
+          },
+          {
+            "name": "Noodles & Pasta",
+            "search_link": "/shops/grocery/noodles-and-pasta"
+          },
+          {
+            "name": "Sauce",
+            "search_link": "/shops/grocery/sauce"
+          },
+          {
+            "name": "Soup",
+            "search_link": "/shops/grocery/soup"
+          }
+        ]
+      },
+      {
+        "name": "Home & Cleaning",
+        "search_link": "/shops/grocery/cleaning",
+        "subcategories": [
+          {
+            "name": "Air Fresher",
+            "search_link": "/shops/grocery/air-freshner"
+          },
+          {
+            "name": "Cleaning spray",
+            "search_link": "/shops/grocery/cleaning-spray"
+          },
+          {
+            "name": "Laundry",
+            "search_link": "/shops/grocery/laundry"
+          }
+        ]
+      },
+      {
+        "name": "Cooking",
+        "search_link": "/shops/grocery/cooking",
+        "subcategories": [
+          {
+            "name": "Oil",
+            "search_link": "/shops/grocery/oil"
+          },
+          {
+            "name": "Rice",
+            "search_link": "/shops/grocery/rice"
+          },
+          {
+            "name": "Salt & Suger",
+            "search_link": "/shops/grocery/salt-sugar"
+          }
+        ]
+      }
+    ],
+    "makeup": [
+      {
+        "name": "All",
+        "search_link": "/shops/makeup"
+      },
+      {
+        "name": "Face",
+        "search_link": "/shops/makeup/face",
+        "subcategories": [
+          {
+            "name": "Blusher",
+            "search_link": "/shops/makeup/blusher"
+          },
+          {
+            "name": "Foundation",
+            "search_link": "/shops/makeup/foundation"
+          },
+          {
+            "name": "Face Powder",
+            "search_link": "/shops/makeup/face-powder"
+          }
+        ]
+      },
+      {
+        "name": "Eyes",
+        "search_link": "/shops/makeup/eyes",
+        "subcategories": [
+          {
+            "name": "Eye Shadow",
+            "search_link": "/shops/makeup/eye-shadow"
+          },
+          {
+            "name": "Glitter",
+            "search_link": "/shops/makeup/glitter"
+          },
+          {
+            "name": "Mascara",
+            "search_link": "/shops/makeup/mascara"
+          }
+        ]
+      },
+      {
+        "name": "Lips",
+        "search_link": "/shops/makeup/lips",
+        "subcategories": [
+          {
+            "name": "Lip gloss",
+            "search_link": "/shops/makeup/lip-gloss"
+          },
+          {
+            "name": "Lipstick",
+            "search_link": "/shops/makeup/lip-stick"
+          },
+          {
+            "name": "Lip kit",
+            "search_link": "/shops/makeup/lip-kit"
+          }
+        ]
+      },
+      {
+        "name": "Accessories",
+        "search_link": "/shops/makeup/accessories"
+      },
+      {
+        "name": "Shaving Needs",
+        "search_link": "/shops/makeup/shaving-needs"
+      },
+      {
+        "name": "Oral Care",
+        "search_link": "/shops/makeup/oral-care"
+      },
+      {
+        "name": "Facial Care",
+        "search_link": "/shops/makeup/facial-care"
+      },
+      {
+        "name": "Deodorant",
+        "search_link": "/shops/makeup/deodorant"
+      },
+      {
+        "name": "Bath & Oil",
+        "search_link": "/shops/makeup/bath-oil"
+      }
+    ],
+    "medicine": [
+      {
+        "name": "All",
+        "search_link": "/shops/medicine"
+      },
+      {
+        "name": "Baby Care",
+        "search_link": "/shops/medicine/baby-care"
+      },
+      {
+        "name": "First Aid kit",
+        "search_link": "/shops/medicine/first-aid-kit"
+      },
+      {
+        "name": "Oral",
+        "search_link": "/shops/medicine/oral"
+      },
+      {
+        "name": "Beauty Care",
+        "search_link": "/shops/medicine/beauty-care"
+      },
+      {
+        "name": "Contraceptive",
+        "search_link": "/shops/medicine/contraceptive"
+      },
+      {
+        "name": "Face and skin care",
+        "search_link": "/shops/medicine/face-and-skincare"
+      },
+      {
+        "name": "Feminine hygiene",
+        "search_link": "/shops/medicine/feminine-hygiene"
+      },
+      {
+        "name": "Pregnancy",
+        "search_link": "/shops/medicine/pregnancy"
+      }
+    ]
+  }
+}

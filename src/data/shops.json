@@ -1,0 +1,23 @@
+[
+  { "title": "gadgets", "icon": "/icons/gadgets.png", "url": "shops/gadgets" },
+  { "title": "grocery", "icon": "/icons/grocery.png", "url": "shops/grocery" },
+  { "title": "bakery", "icon": "/icons/bakery.png", "url": "shops/bakery" },
+  {
+    "title": "clothing",
+    "icon": "/icons/clothing.png",
+    "url": "shops/clothing"
+  },
+  { "title": "makeup", "icon": "/icons/makeup.png", "url": "shops/makeup" },
+  { "title": "bags", "icon": "/icons/bag.png", "url": "shops/bags" },
+  {
+    "title": "furniture",
+    "icon": "/icons/furniture.png",
+    "url": "shops/furniture"
+  },
+  { "title": "books", "icon": "/icons/books.png", "url": "shops/books" },
+  {
+    "title": "medicine",
+    "icon": "/icons/medicine.png",
+    "url": "shops/medicine"
+  }
+]

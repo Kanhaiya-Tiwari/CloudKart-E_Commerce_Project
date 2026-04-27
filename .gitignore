@@ -1,0 +1,95 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+.yarn/install-state.gz
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+.next
+next-env.d.ts
+
+# production
+/build
+/dist
+
+# misc
+.DS_Store
+*.pem
+.vscode
+.idea
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# local env files
+# .env
+# .env.local
+# .env.*
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+
+# logs
+*.log
+logs/
+
+# cache
+.cache/
+.npm/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional stylelint cache
+.stylelintcache
+
+# Temporary files
+*.swp
+*.swo
+*~
+
+# MongoDB
+*.mongodb
+mongodb/
+
+terraform/.terraform/*
+terraform/terra-key.pub
+terraform/terra-key
+terraform/terraform.tfstate*
+terraform/.terraform.lock.hcl
+terraform/.terraform/modules/*
+
+.terraform.tfstate.lock.info
+terraform/.terraform
+.terraform.lock.hcl
+.terraform
+terraform.tfstate
+terraform.tfstate.backup
+terraform/terraform.tfstate
+terraform/terraform.tfstate.backup
+terra-key.pub
+terra-key

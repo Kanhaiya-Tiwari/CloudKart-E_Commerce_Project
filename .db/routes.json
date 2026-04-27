@@ -1,0 +1,5 @@
+{
+  "/products/*": "/products/$1",
+  "/products/featured": "/products?id_like=06|016|026|036",
+  "/products/books": "/products?categories_like=books"
+}
