@@ -1,0 +1,194 @@
+# ============================================================
+# KUBERNETES NAMESPACES
+# ============================================================
+resource "kubernetes_namespace" "monitoring" {
+  metadata { name = "monitoring" }
+  depends_on = [module.eks]
+}
+
+resource "kubernetes_namespace" "argocd" {
+  metadata { name = "argocd" }
+  depends_on = [module.eks]
+}
+
+resource "kubernetes_namespace" "ingress_nginx" {
+  metadata { name = "ingress-nginx" }
+  depends_on = [module.eks]
+}
+
+resource "kubernetes_namespace" "cert_manager" {
+  metadata { name = "cert-manager" }
+  depends_on = [module.eks]
+}
+
+resource "kubernetes_namespace" "cloudkart" {
+  metadata {
+    name = "cloudkart"
+  }
+  depends_on = [module.eks]
+}
+
+# ============================================================
+# INGRESS-NGINX
+# ============================================================
+resource "helm_release" "ingress_nginx" {
+  name       = "ingress-nginx"
+  repository = "https://kubernetes.github.io/ingress-nginx"
+  chart      = "ingress-nginx"
+  version    = "4.10.1"
+  namespace  = kubernetes_namespace.ingress_nginx.metadata[0].name
+
+  values = [
+    <<-EOT
+    controller:
+      service:
+        type: LoadBalancer
+      resources:
+        requests:
+          cpu: 100m
+          memory: 128Mi
+        limits:
+          cpu: 500m
+          memory: 512Mi
+    EOT
+  ]
+
+  depends_on = [module.eks]
+}
+
+# ============================================================
+# CERT-MANAGER
+# ============================================================
+resource "helm_release" "cert_manager" {
+  name       = "cert-manager"
+  repository = "https://charts.jetstack.io"
+  chart      = "cert-manager"
+  version    = "v1.14.5"
+  namespace  = kubernetes_namespace.cert_manager.metadata[0].name
+
+  values = [
+    <<-EOT
+    installCRDs: true
+    resources:
+      requests:
+        cpu: 50m
+        memory: 64Mi
+      limits:
+        cpu: 200m
+        memory: 256Mi
+    EOT
+  ]
+
+  depends_on = [helm_release.ingress_nginx]
+}
+
+# ============================================================
+# KUBE-PROMETHEUS-STACK (Grafana + Prometheus + Alertmanager)
+# ============================================================
+resource "helm_release" "kube_prometheus_stack" {
+  name       = "kube-prometheus-stack"
+  repository = "https://prometheus-community.github.io/helm-charts"
+  chart      = "kube-prometheus-stack"
+  version    = "58.7.2"
+  namespace  = kubernetes_namespace.monitoring.metadata[0].name
+
+  values = [
+    <<-EOT
+    grafana:
+      sidecar:
+        dashboards:
+          enabled: true
+      ingress:
+        enabled: true
+        ingressClassName: nginx
+      resources:
+        requests:
+          memory: 128Mi
+        limits:
+          memory: 256Mi
+    prometheus:
+      prometheusSpec:
+        storageSpec:
+          volumeClaimTemplate:
+            spec:
+              accessModes:
+                - ReadWriteOnce
+              resources:
+                requests:
+                  storage: 10Gi
+        resources:
+          requests:
+            memory: 512Mi
+          limits:
+            memory: 1Gi
+    EOT
+  ]
+
+  depends_on = [module.eks, kubernetes_namespace.monitoring]
+}
+
+# ============================================================
+# LOKI-STACK (Loki + Promtail)
+# ============================================================
+resource "helm_release" "loki_stack" {
+  name       = "loki-stack"
+  repository = "https://grafana.github.io/helm-charts"
+  chart      = "loki-stack"
+  version    = "2.10.2"
+  namespace  = kubernetes_namespace.monitoring.metadata[0].name
+
+  values = [
+    <<-EOT
+    promtail:
+      enabled: true
+    loki:
+      persistence:
+        enabled: true
+        size: 10Gi
+      resources:
+        requests:
+          memory: 128Mi
+        limits:
+          memory: 512Mi
+    EOT
+  ]
+
+  depends_on = [helm_release.kube_prometheus_stack]
+}
+
+# ============================================================
+# OPENTELEMETRY COLLECTOR
+# ============================================================
+resource "helm_release" "opentelemetry_collector" {
+  name       = "opentelemetry-collector"
+  repository = "https://open-telemetry.github.io/opentelemetry-helm-charts"
+  chart      = "opentelemetry-collector"
+  version    = "0.90.0"
+  namespace  = kubernetes_namespace.monitoring.metadata[0].name
+
+  values = [
+    <<-EOT
+    mode: daemonset
+    config:
+      exporters:
+        logging: {}
+      service:
+        pipelines:
+          traces:
+            receivers: [otlp]
+            exporters: [logging]
+          metrics:
+            receivers: [otlp]
+            exporters: [logging]
+    resources:
+      requests:
+        cpu: 50m
+        memory: 64Mi
+      limits:
+        cpu: 200m
+        memory: 256Mi
+    EOT
+  ]
+
+  depends_on = [helm_release.loki_stack]
+}

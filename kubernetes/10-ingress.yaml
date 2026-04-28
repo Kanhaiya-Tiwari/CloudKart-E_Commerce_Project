@@ -10,10 +10,10 @@ metadata:
 spec:
   tls:
   - hosts:
-    - cloudkart.letsdeployit.com
+    - cloudkart.buildwithkanha.shop
     secretName: cloudkart-tls-secret  # Cert-Manager will manage this
   rules:
-  - host: cloudkart.letsdeployit.com
+  - host: cloudkart.buildwithkanha.shop
     http:
       paths:
       - path: /
