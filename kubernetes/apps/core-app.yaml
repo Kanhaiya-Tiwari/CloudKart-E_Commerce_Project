@@ -13,10 +13,11 @@ spec:
     path: kubernetes/core
   destination:
     server: https://kubernetes.default.svc
-    namespace: cloudkart
+    namespace: default
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+      - ServerSideApply=true
