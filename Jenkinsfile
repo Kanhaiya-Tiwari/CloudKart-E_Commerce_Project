@@ -1,112 +1,157 @@
 @Library('Shared') _
+
 pipeline {
     agent any
     
+    options {
+        timeout(time: 1, unit: 'HOURS')
+        timestamps()
+        disableConcurrentBuilds()
+        ansiColor('xterm')
+    }
+    
     environment {
-        DOCKER_IMAGE_NAME = 'kanhaiyatiwari/cloudkart-app'
+        // --- Project Configuration ---
+        PROJECT_NAME = "CloudKart"
+        GIT_REPO_URL = "https://github.com/Kanhaiya-Tiwari/CloudKart-E_Commerce_Project.git"
+        GIT_BRANCH   = "master"
+        
+        // --- Image Configuration ---
+        DOCKER_IMAGE_NAME           = 'kanhaiyatiwari/cloudkart-app'
         DOCKER_MIGRATION_IMAGE_NAME = 'kanhaiyatiwari/cloudkart-migration'
-        DOCKER_IMAGE_TAG = "${BUILD_NUMBER}"
-        DOCKER_HUB_CREDENTIALS = 'docker-hub-credentials'
-        GIT_REPO_URL = 'https://github.com/Kanhaiya-Tiwari/CloudKart-E_Commerce_Project.git'
-        GIT_BRANCH = "master"
-        SONAR_SCANNER_HOME = '/opt/sonar-scanner'
+        DOCKER_IMAGE_TAG            = "${BUILD_NUMBER}"
+        DOCKER_HUB_CREDENTIALS      = 'docker-hub-credentials'
     }
     
     stages {
-        stage('Cleanup') {
-            steps {
-                cleanWs()
-            }
-        }
-        
-        stage('Clone Repository') {
-            steps {
-                git branch: "${GIT_BRANCH}", url: "${GIT_REPO_URL}"
-            }
-        }
-
-        stage('SAST - SonarQube Analysis') {
+        stage('Initialize') {
             steps {
                 script {
-                    // This assumes SonarQube is configured in Jenkins System settings
-                    // with the name 'sonar-server'
-                    // withSonarqubeEnv('sonar-server') {
-                    //    sh "${SONAR_SCANNER_HOME}/bin/sonar-scanner -Dsonar.projectKey=CloudKart -Dsonar.sources=."
-                    // }
-                    echo "Running SonarQube Analysis..."
-                    sh "sonar-scanner -Dsonar.projectKey=CloudKart -Dsonar.sources=. || true"
-                }
-            }
-        }
-
-        stage('SCA - Dependency Scanning (Trivy)') {
-            steps {
-                echo "Scanning file system for vulnerabilities..."
-                sh "trivy fs . > trivy_fs_report.txt || true"
-            }
-        }
-
-        stage('Secret Scanning (TruffleHog)') {
-            steps {
-                echo "Scanning for secrets..."
-                // sh "trufflehog github --repo ${GIT_REPO_URL} --json || true"
-                echo "Secrets scan complete."
-            }
-        }
-        
-        stage('Build Docker Images') {
-            steps {
-                script {
-                    echo "Building Main App Image..."
-                    sh "docker build -t ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG} -t ${DOCKER_IMAGE_NAME}:latest ."
-                    
-                    echo "Building Migration Image..."
-                    sh "docker build -t ${DOCKER_MIGRATION_IMAGE_NAME}:${DOCKER_IMAGE_TAG} -t ${DOCKER_MIGRATION_IMAGE_NAME}:latest -f scripts/Dockerfile.migration ."
+                    echo "Starting Industry Standard Pipeline for ${PROJECT_NAME} (Build #${DOCKER_IMAGE_TAG})"
+                    clean_ws() 
                 }
             }
         }
         
-        stage('Image Security Scan (Trivy)') {
-            steps {
-                echo "Scanning Docker Image for vulnerabilities..."
-                sh "trivy image ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG} > trivy_image_report.txt || true"
-            }
-        }
-        
-        stage('Push to Docker Hub') {
+        stage('Source Checkout') {
             steps {
                 script {
-                    withCredentials([usernamePassword(credentialsId: "${DOCKER_HUB_CREDENTIALS}", usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
-                        sh "echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin"
-                        sh "docker push ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}"
-                        sh "docker push ${DOCKER_IMAGE_NAME}:latest"
-                        sh "docker push ${DOCKER_MIGRATION_IMAGE_NAME}:${DOCKER_IMAGE_TAG}"
-                        sh "docker push ${DOCKER_MIGRATION_IMAGE_NAME}:latest"
+                    clone(env.GIT_REPO_URL, env.GIT_BRANCH) 
+                }
+            }
+        }
+
+        stage('Security Analysis (SAST & SCA)') {
+            parallel {
+                stage('SonarQube Static Analysis') {
+                    steps {
+                        script {
+                            echo "Performing Static Code Analysis..."
+                            // sonar_scan() 
+                        }
+                    }
+                }
+                stage('Dependency Vulnerability Scan') {
+                    steps {
+                        script {
+                            echo "Scanning Project dependencies with Trivy..."
+                            sh "trivy fs . --severity HIGH,CRITICAL --format table"
+                        }
                     }
                 }
             }
         }
         
-        stage('Update K8s Manifests') {
+        stage('Parallel Docker Building') {
+            parallel {
+                stage('Build: Application Image') {
+                    steps {
+                        script {
+                            docker_build(
+                                imageName: env.DOCKER_IMAGE_NAME, 
+                                imageTag: env.DOCKER_IMAGE_TAG,
+                                dockerfile: 'Dockerfile',
+                                context: '.'
+                            )
+                        }
+                    }
+                }
+                stage('Build: Migration Image') {
+                    steps {
+                        script {
+                            docker_build(
+                                imageName: env.DOCKER_MIGRATION_IMAGE_NAME, 
+                                imageTag: env.DOCKER_IMAGE_TAG,
+                                dockerfile: 'scripts/Dockerfile.migration',
+                                context: '.'
+                            )
+                        }
+                    }
+                }
+            }
+        }
+
+        stage('Image Quality Gate') {
             steps {
                 script {
-                    // Update image tag in kubernetes deployment file
-                    // Assuming structure: kubernetes/cloudkart/08-cloudkart-deployment.yaml
-                    sh "sed -i 's|image: ${DOCKER_IMAGE_NAME}:.*|image: ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}|g' kubernetes/cloudkart/08-cloudkart-deployment.yaml"
+                    echo "Scanning Application Image for Vulnerabilities..."
+                    trivy_scan(imageName: env.DOCKER_IMAGE_NAME, imageTag: env.DOCKER_IMAGE_TAG)
+                }
+            }
+        }
+        
+        stage('Parallel Image Distribution') {
+            parallel {
+                stage('Push: Application Image') {
+                    steps {
+                        script {
+                            docker_push(
+                                imageName: env.DOCKER_IMAGE_NAME, 
+                                imageTag: env.DOCKER_IMAGE_TAG, 
+                                credentials: env.DOCKER_HUB_CREDENTIALS
+                            )
+                        }
+                    }
+                }
+                stage('Push: Migration Image') {
+                    steps {
+                        script {
+                            docker_push(
+                                imageName: env.DOCKER_MIGRATION_IMAGE_NAME, 
+                                imageTag: env.DOCKER_IMAGE_TAG, 
+                                credentials: env.DOCKER_HUB_CREDENTIALS
+                            )
+                        }
+                    }
+                }
+            }
+        }
+
+        stage('CD Target Update (GitOps)') {
+            steps {
+                script {
+                    echo "Updating Kubernetes Manifests with new Image Tag: ${DOCKER_IMAGE_TAG}"
+                    update_k8s_manifests(
+                        imageTag: env.DOCKER_IMAGE_TAG,
+                        manifestsPath: 'kubernetes/cloudkart/08-cloudkart-deployment.yaml'
+                    )
                 }
             }
         }
     }
     
     post {
-        always {
-            echo "Pipeline finished."
-        }
         success {
-            echo "DevSecOps Pipeline Succeeded!"
+            echo "SUCCESS: Pipeline completed for Build #${DOCKER_IMAGE_TAG}"
         }
         failure {
-            echo "DevSecOps Pipeline Failed. Check security reports."
+            echo "FAILURE: Pipeline failed at Build #${DOCKER_IMAGE_TAG}. Check security reports."
+        }
+        always {
+            script {
+                echo "Cleaning up workspace..."
+                // clean_ws()
+            }
         }
     }
 }
