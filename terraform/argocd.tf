@@ -87,7 +87,7 @@ resource "kubectl_manifest" "argocd_app_of_apps" {
       source = {
         repoURL        = var.github_repo_url
         targetRevision = "master"
-        path           = "kubernetes"
+        path           = "kubernetes/apps"
       }
 
       destination = {

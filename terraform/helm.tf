@@ -101,6 +101,12 @@ resource "helm_release" "kube_prometheus_stack" {
       ingress:
         enabled: true
         ingressClassName: nginx
+      additionalDataSources:
+        - name: Loki
+          type: loki
+          url: http://loki-stack.monitoring.svc.cluster.local:3100
+          access: proxy
+          isDefault: false
       resources:
         requests:
           memory: 128Mi
@@ -108,6 +114,7 @@ resource "helm_release" "kube_prometheus_stack" {
           memory: 256Mi
     prometheus:
       prometheusSpec:
+        enableRemoteWriteReceiver: true
         storageSpec:
           volumeClaimTemplate:
             spec:
@@ -169,9 +176,17 @@ resource "helm_release" "opentelemetry_collector" {
   values = [
     <<-EOT
     mode: daemonset
+    image:
+      repository: otel/opentelemetry-collector-contrib
     config:
       exporters:
         logging: {}
+        loki:
+          endpoint: "http://loki-stack.monitoring.svc.cluster.local:3100/loki/api/v1/push"
+        prometheusremotewrite:
+          endpoint: "http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090/api/v1/write"
+          tls:
+            insecure: true
       service:
         pipelines:
           traces:
@@ -179,7 +194,10 @@ resource "helm_release" "opentelemetry_collector" {
             exporters: [logging]
           metrics:
             receivers: [otlp]
-            exporters: [logging]
+            exporters: [logging, prometheusremotewrite]
+          logs:
+            receivers: [otlp]
+            exporters: [logging, loki]
     resources:
       requests:
         cpu: 50m

@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cloudkart-core
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Kanhaiya-Tiwari/CloudKart-E_Commerce_Project
+    targetRevision: master
+    path: kubernetes/core
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: cloudkart
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
