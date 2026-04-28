@@ -24,7 +24,7 @@ pipeline {
         stage('Clone Repository') {
             steps {
                 script {
-                    clone("https://github.com/Kanhaiya-Tiwari/CloudKart-E_Commerce_Project.git","master")
+                    clone("https://github.com/kanhaiyatiwari/cloudkart-app.git","master")
                 }
             }
         }
@@ -70,7 +70,10 @@ pipeline {
         stage('Security Scan with Trivy') {
             steps {
                 script {
+                    // Create directory for results
+                  
                     trivy_scan()
+                    
                 }
             }
         }
@@ -103,40 +106,19 @@ pipeline {
             }
         }
         
+        // Add this new stage
         stage('Update Kubernetes Manifests') {
             steps {
                 script {
-                    withCredentials([usernamePassword(credentialsId: 'github-credentials', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-                        sh """
-                            git config user.name "Jenkins CI"
-                            git config user.email "jenkins@cloudkart.com"
-                            
-                            # Update App Deployment Image
-                            sed -i 's|image: kanhaiyatiwari/cloudkart-app:.*|image: kanhaiyatiwari/cloudkart-app:${DOCKER_IMAGE_TAG}|g' kubernetes/08-cloudkart-deployment.yaml
-                            
-                            # Update Migration Job Image
-                            sed -i 's|image: kanhaiyatiwari/cloudkart-migration:.*|image: kanhaiyatiwari/cloudkart-migration:${DOCKER_IMAGE_TAG}|g' kubernetes/12-migration-job.yaml
-                            
-                            git add kubernetes/08-cloudkart-deployment.yaml kubernetes/12-migration-job.yaml
-                            git commit -m "Update images to version ${DOCKER_IMAGE_TAG} [skip ci]" || echo "No changes to commit"
-                            git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/Kanhaiya-Tiwari/CloudKart-E_Commerce_Project.git master
-                        """
-                    }
+                    update_k8s_manifests(
+                        imageTag: env.DOCKER_IMAGE_TAG,
+                        manifestsPath: 'kubernetes',
+                        gitCredentials: 'github-credentials',
+                        gitUserName: 'Jenkins CI',
+                        gitUserEmail: 'shubhamnath5@gmail.com'
+                    )
                 }
             }
-        }
-    }
-
-    post {
-        success {
-            mail to: 'knhapndt@gmail.com',
-                 subject: "SUCCESS: Build ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                 body: "CloudKart Pipeline build successfully completed.\n\nView results at: ${env.BUILD_URL}"
-        }
-        failure {
-            mail to: 'knhapndt@gmail.com',
-                 subject: "FAILED: Build ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                 body: "CloudKart Pipeline build failed. Please check the logs.\n\nLogs: ${env.BUILD_URL}console"
         }
     }
 }
