@@ -126,4 +126,17 @@ pipeline {
             }
         }
     }
+
+    post {
+        success {
+            mail to: 'knhapndt@gmail.com',
+                 subject: "SUCCESS: Build ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                 body: "CloudKart Pipeline build successfully completed.\n\nView results at: ${env.BUILD_URL}"
+        }
+        failure {
+            mail to: 'knhapndt@gmail.com',
+                 subject: "FAILED: Build ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                 body: "CloudKart Pipeline build failed. Please check the logs.\n\nLogs: ${env.BUILD_URL}console"
+        }
+    }
 }
