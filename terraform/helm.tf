@@ -210,3 +210,39 @@ resource "helm_release" "opentelemetry_collector" {
 
   depends_on = [helm_release.loki_stack]
 }
+
+# ============================================================
+# SONARQUBE (Required by Jenkins pipeline for SAST)
+# ============================================================
+resource "kubernetes_namespace" "sonarqube" {
+  metadata { name = "sonarqube" }
+  depends_on = [module.eks]
+}
+
+resource "helm_release" "sonarqube" {
+  name       = "sonarqube"
+  repository = "https://SonarSource.github.io/helm-chart-sonarqube"
+  chart      = "sonarqube"
+  version    = "10.4.1+2389"
+  namespace  = kubernetes_namespace.sonarqube.metadata[0].name
+
+  values = [
+    <<-EOT
+    service:
+      type: LoadBalancer
+    persistence:
+      enabled: true
+      storageClass: ebs-sc
+      size: 10Gi
+    resources:
+      requests:
+        cpu: 200m
+        memory: 512Mi
+      limits:
+        cpu: 800m
+        memory: 2Gi
+    EOT
+  ]
+
+  depends_on = [module.eks, kubernetes_namespace.sonarqube, helm_release.kube_prometheus_stack]
+}

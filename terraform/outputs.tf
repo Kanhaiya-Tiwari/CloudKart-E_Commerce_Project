@@ -115,3 +115,8 @@ output "deployment_instructions" {
     For more details, check terraform outputs above.
   EOT
 }
+
+output "sonarqube_url" {
+  description = "Get SonarQube LoadBalancer URL (admin/admin on first login)"
+  value       = "kubectl get svc -n sonarqube sonarqube-sonarqube -o jsonpath='{.status.loadBalancer.ingress[0].hostname}'"
+}
