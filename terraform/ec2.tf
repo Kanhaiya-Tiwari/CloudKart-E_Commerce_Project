@@ -71,11 +71,11 @@ resource "aws_security_group" "jenkins_sg" {
 }
 
 resource "aws_instance" "jenkins" {
-  ami             = data.aws_ami.os_image.id
-  instance_type   = var.jenkins_instance_type
-  key_name        = aws_key_pair.deployer.key_name
-  security_groups = [aws_security_group.jenkins_sg.id]
-  user_data       = file("${path.module}/install_tools.sh")
+  ami                    = data.aws_ami.os_image.id
+  instance_type          = var.jenkins_instance_type
+  key_name               = aws_key_pair.deployer.key_name
+  vpc_security_group_ids = [aws_security_group.jenkins_sg.id]
+  user_data              = file("${path.module}/install_tools.sh")
 
   tags = {
     Name = "CloudKart-Jenkins-Server"

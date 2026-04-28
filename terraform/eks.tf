@@ -15,6 +15,10 @@ module "eks" {
     vpc-cni = {
       most_recent = true
     }
+    aws-ebs-csi-driver = {
+      most_recent              = true
+      service_account_role_arn = module.ebs_csi_irsa_role.iam_role_arn
+    }
   }
 
   vpc_id                   = module.vpc.vpc_id
@@ -32,6 +36,9 @@ module "eks" {
   eks_managed_node_group_defaults = {
     instance_types                        = [var.node_instance_type]
     attach_cluster_primary_security_group = true
+    iam_role_additional_policies = {
+      AmazonEBSCSIDriverPolicy = "arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"
+    }
   }
 
   eks_managed_node_groups = {
@@ -76,4 +83,19 @@ data "aws_instances" "eks_nodes" {
   }
 
   depends_on = [module.eks]
+}
+
+module "ebs_csi_irsa_role" {
+  source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
+  version = "~> 5.0"
+
+  role_name             = "${local.name}-ebs-csi"
+  attach_ebs_csi_policy = true
+
+  oidc_providers = {
+    ex = {
+      provider_arn               = module.eks.oidc_provider_arn
+      namespace_service_accounts = ["kube-system:ebs-csi-controller-sa"]
+    }
+  }
 }

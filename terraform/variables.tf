@@ -57,12 +57,12 @@ variable "jenkins_key_name" {
 # ============================================================
 variable "github_repo_url" {
   description = "GitHub repo URL for ArgoCD to sync from"
-  default     = "https://github.com/kanhaiyatiwari/CloudKart-E_Commerce"
+  default     = "https://github.com/Kanhaiya-Tiwari/CloudKart-E_Commerce_Project"
 }
 
 variable "github_repo_username" {
   description = "GitHub username for private repo access"
-  default     = "kanhaiyatiwari"
+  default     = "Kanhaiya-Tiwari"
 }
 
 variable "github_token" {
