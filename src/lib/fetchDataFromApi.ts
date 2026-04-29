@@ -3,7 +3,7 @@ import axios from "axios";
 // Get the base URL from environment or use window.location.origin in the browser
 const baseURL = typeof window !== 'undefined' 
   ? `${window.location.origin}/api`
-  : (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api');
+  : 'http://localhost:3000/api';
 
 // Add request interceptor to include token
 export const axiosInstance = axios.create({
