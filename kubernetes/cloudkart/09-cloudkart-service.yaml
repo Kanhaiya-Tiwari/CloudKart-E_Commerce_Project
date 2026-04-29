@@ -4,10 +4,9 @@ metadata:
   name: cloudkart-service
   namespace: cloudkart
 spec:
-  type: NodePort
+  type: LoadBalancer
   ports:
     - port: 80
       targetPort: 3000
-      nodePort: 30000
   selector:
     app: cloudkart
