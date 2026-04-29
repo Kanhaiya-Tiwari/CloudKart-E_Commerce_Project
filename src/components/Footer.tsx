@@ -215,7 +215,7 @@ const Footer = () => {
               rel="noopener noreferrer"
               className="font-medium hover:text-primary transition-all duration-300 hover:underline decoration-primary decoration-2 underline-offset-4"
             >
-              Md. Afzal Hassan Ehsani
+              Kanhaiya Tiwari
             </a>
           </div>
           

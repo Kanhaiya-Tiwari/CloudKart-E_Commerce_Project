@@ -2,7 +2,7 @@
 
 # Update system and install core packages
 sudo apt update
-sudo apt install -y fontconfig openjdk-17-jre wget apt-transport-https gnupg lsb-release snapd unzip
+sudo apt install -y fontconfig openjdk-21-jre wget apt-transport-https gnupg lsb-release snapd unzip
 
 # Jenkins installation (Fixing GPG Key for 2026 version)
 sudo wget -O /usr/share/keyrings/jenkins-keyring.asc \
