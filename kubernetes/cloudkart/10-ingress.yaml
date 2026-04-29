@@ -5,14 +5,23 @@ metadata:
   namespace: cloudkart
   annotations:
     nginx.ingress.kubernetes.io/proxy-body-size: "50m"
-    kubernetes.io/ingress.class: "nginx"
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: "60"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "60"
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
 spec:
-  tls:
-  - hosts:
-    - cloudkart.buildwithkanha.shop
-    secretName: cloudkart-tls-secret  # Cert-Manager will manage this
+  ingressClassName: nginx
   rules:
+  - host: app.52.48.50.175.nip.io
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: cloudkart-service
+            port:
+              number: 80
+  # Keep domain-based rule for when DNS is configured later
   - host: cloudkart.buildwithkanha.shop
     http:
       paths:
@@ -23,14 +32,3 @@ spec:
             name: cloudkart-service
             port:
               number: 80
-  - host: a790c673c57734fdb9305adb351c2b3a-43593584.eu-west-1.elb.amazonaws.com
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: cloudkart-service
-            port:
-              number: 80
-

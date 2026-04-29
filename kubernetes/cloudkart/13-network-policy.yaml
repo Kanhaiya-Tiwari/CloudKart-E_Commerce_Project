@@ -1,0 +1,70 @@
+---
+# ============================================================
+# NETWORK POLICY: CloudKart App
+# Only allow traffic from ingress-nginx namespace
+# ============================================================
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: cloudkart-netpol
+  namespace: cloudkart
+spec:
+  podSelector:
+    matchLabels:
+      app: cloudkart
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    # Allow traffic only from ingress-nginx
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: ingress-nginx
+      ports:
+        - protocol: TCP
+          port: 3000
+  egress:
+    # Allow DNS
+    - ports:
+        - protocol: UDP
+          port: 53
+    # Allow MongoDB connection
+    - to:
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/name: mongodb
+      ports:
+        - protocol: TCP
+          port: 27017
+    # Allow all external HTTPS (for API calls)
+    - ports:
+        - protocol: TCP
+          port: 443
+        - protocol: TCP
+          port: 80
+---
+# ============================================================
+# NETWORK POLICY: MongoDB
+# Only allow traffic from cloudkart app
+# ============================================================
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: mongodb-netpol
+  namespace: cloudkart
+spec:
+  podSelector:
+    matchLabels:
+      app: mongodb
+  policyTypes:
+    - Ingress
+  ingress:
+    # Only cloudkart app pods can connect to MongoDB
+    - from:
+        - podSelector:
+            matchLabels:
+              app: cloudkart
+      ports:
+        - protocol: TCP
+          port: 27017
