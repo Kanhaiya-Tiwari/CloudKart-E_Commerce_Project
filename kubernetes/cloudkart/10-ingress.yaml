@@ -23,4 +23,14 @@ spec:
             name: cloudkart-service
             port:
               number: 80
+  - host: a790c673c57734fdb9305adb351c2b3a-43593584.eu-west-1.elb.amazonaws.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: cloudkart-service
+            port:
+              number: 80
 
