@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
       - name: migration
-        image: kanhaiyatiwari/cloudkart-migration:21
+        image: kanhaiyatiwari/cloudkart-migration:22
         imagePullPolicy: Always
         env:
         - name: MONGODB_URI
