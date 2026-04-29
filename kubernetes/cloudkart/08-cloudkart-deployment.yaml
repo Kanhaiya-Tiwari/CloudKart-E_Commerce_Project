@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: cloudkart
-          image: kanhaiyatiwari/cloudkart-app:16
+          image: kanhaiyatiwari/cloudkart-app:17
           imagePullPolicy: Always
           ports:
             - containerPort: 3000
