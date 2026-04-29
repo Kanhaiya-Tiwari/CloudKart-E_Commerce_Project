@@ -177,21 +177,30 @@ pipeline {
         
 
         stage('Update K8s Manifests') {
-
             steps {
-
                 script {
-
+                    echo "Updating image tags in manifests..."
                     // Update image tag in kubernetes deployment file
-
-                    // Assuming structure: kubernetes/cloudkart/08-cloudkart-deployment.yaml
-
                     sh "sed -i 's|image: ${DOCKER_IMAGE_NAME}:.*|image: ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}|g' kubernetes/cloudkart/08-cloudkart-deployment.yaml"
-
+                    
+                    // Update image tag in migration job file
+                    sh "sed -i 's|image: ${DOCKER_MIGRATION_IMAGE_NAME}:.*|image: ${DOCKER_MIGRATION_IMAGE_NAME}:${DOCKER_IMAGE_TAG}|g' kubernetes/cloudkart/12-migration-job.yaml"
                 }
-
             }
+        }
 
+        stage('Run Database Migration') {
+            steps {
+                script {
+                    echo "Running Database Migration Job..."
+                    // Update kubeconfig in case it's not configured
+                    sh "aws eks update-kubeconfig --region eu-west-1 --name cloudkart-eks-cluster || true"
+                    
+                    // Delete old job if it exists and apply new one
+                    sh "kubectl delete job db-migration -n cloudkart || true"
+                    sh "kubectl apply -f kubernetes/cloudkart/12-migration-job.yaml"
+                }
+            }
         }
 
     }

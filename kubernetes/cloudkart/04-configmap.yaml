@@ -6,7 +6,7 @@ metadata:
 data:
   MONGODB_URI: "mongodb://mongodb-service:27017/cloudkart"
   NODE_ENV: "production"
-  NEXT_PUBLIC_API_URL: "https://cloudkart.buildwithkanha.shop/api"
-  NEXTAUTH_URL: "https://cloudkart.buildwithkanha.shop/"
+  NEXT_PUBLIC_API_URL: "http://app.52.48.50.175.nip.io/api"
+  NEXTAUTH_URL: "http://app.52.48.50.175.nip.io/"
   NEXTAUTH_SECRET: "d9Ddo4p4or58ERfSPij4Skp7hXt8puYERlTETxlhJ7A="
   JWT_SECRET: "66cdad2a74101704d3430e43ee3511009e6bf40b260211cd4f8c6d6b2e73ed3f"
