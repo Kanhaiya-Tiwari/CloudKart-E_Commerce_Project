@@ -189,16 +189,19 @@ pipeline {
             }
         }
 
-        stage('Run Database Migration') {
+        stage('Push Manifests to Git') {
             steps {
                 script {
-                    echo "Running Database Migration Job..."
-                    // Update kubeconfig in case it's not configured
-                    sh "aws eks update-kubeconfig --region eu-west-1 --name cloudkart-eks-cluster || true"
-                    
-                    // Delete old job if it exists and apply new one
-                    sh "kubectl delete job db-migration -n cloudkart || true"
-                    sh "kubectl apply -f kubernetes/cloudkart/12-migration-job.yaml"
+                    echo "Pushing updated manifests to Git..."
+                    withCredentials([usernamePassword(credentialsId: 'github-credentials', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_TOKEN')]) {
+                        sh """
+                            git config user.name "Jenkins CI"
+                            git config user.email "jenkins@example.com"
+                            git add kubernetes/cloudkart/08-cloudkart-deployment.yaml kubernetes/cloudkart/12-migration-job.yaml
+                            git commit -m "Update image tags to ${DOCKER_IMAGE_TAG} [skip ci]" || echo "No changes to commit"
+                            git push https://${GIT_USER}:${GIT_TOKEN}@github.com/Kanhaiya-Tiwari/CloudKart-E_Commerce_Project.git HEAD:master
+                        """
+                    }
                 }
             }
         }
