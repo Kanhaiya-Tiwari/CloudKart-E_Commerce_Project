@@ -101,6 +101,15 @@ resource "helm_release" "kube_prometheus_stack" {
       ingress:
         enabled: true
         ingressClassName: nginx
+        hosts:
+          - grafana.52.48.50.175.nip.io
+        path: /
+      grafana.ini:
+        server:
+          root_url: http://grafana.52.48.50.175.nip.io
+        auth.anonymous:
+          enabled: false
+      adminPassword: "CloudKart@2024!"
       additionalDataSources:
         - name: Loki
           type: loki
@@ -110,8 +119,10 @@ resource "helm_release" "kube_prometheus_stack" {
       resources:
         requests:
           memory: 128Mi
+          cpu: 100m
         limits:
           memory: 256Mi
+          cpu: 300m
     prometheus:
       prometheusSpec:
         enableRemoteWriteReceiver: true
@@ -231,9 +242,14 @@ resource "helm_release" "sonarqube" {
     <<-EOT
     community:
       enabled: true
-    monitoringPasscode: "{233310410117411710110521141002021001120220011511120211624312032112115114115}"
+    monitoringPasscode: "CloudKartSonar2024"
     service:
-      type: LoadBalancer
+      type: ClusterIP
+    ingress:
+      enabled: true
+      ingressClassName: nginx
+      hosts:
+        - sonarqube.52.48.50.175.nip.io
     persistence:
       enabled: true
       size: 10Gi
