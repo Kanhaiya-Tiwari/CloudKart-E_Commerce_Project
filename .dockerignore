@@ -6,6 +6,7 @@ yarn-error.log
 
 # Next.js build output
 .next
+out
 
 # Environment variables
 .env
@@ -20,6 +21,7 @@ yarn-error.log
 
 # Docker
 Dockerfile
+Dockerfile.dev
 docker-compose.yml
 .dockerignore
 
@@ -29,8 +31,20 @@ README.md
 .vscode
 .idea
 
-# Terraform
+# Terraform & Infrastructure
 terraform/
 .terraform/
 terra-key*
 cloudkart-key*
+
+# Kubernetes manifests (not needed in app image)
+kubernetes/
+
+# CI/CD
+Jenkinsfile
+.github/
+
+# Test files
+**/*.test.ts
+**/*.test.tsx
+**/*.spec.ts

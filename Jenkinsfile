@@ -112,13 +112,15 @@ pipeline {
                 stage('Build Main App') {
                     steps {
                         echo "Building Main App Image..."
-                        sh "docker build -t ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG} -t ${DOCKER_IMAGE_NAME}:latest ."
+                        sh "df -h /"
+                        sh "docker build --no-cache -t ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG} -t ${DOCKER_IMAGE_NAME}:latest ."
                     }
                 }
                 stage('Build Migration') {
                     steps {
                         echo "Building Migration Image..."
-                        sh "docker build -t ${DOCKER_MIGRATION_IMAGE_NAME}:${DOCKER_IMAGE_TAG} -t ${DOCKER_MIGRATION_IMAGE_NAME}:latest -f scripts/Dockerfile.migration ."
+                        sh "df -h /"
+                        sh "docker build --no-cache -t ${DOCKER_MIGRATION_IMAGE_NAME}:${DOCKER_IMAGE_TAG} -t ${DOCKER_MIGRATION_IMAGE_NAME}:latest -f scripts/Dockerfile.migration ."
                     }
                 }
             }
