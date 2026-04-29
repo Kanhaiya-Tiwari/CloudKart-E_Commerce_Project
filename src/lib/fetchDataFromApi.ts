@@ -18,9 +18,12 @@ export const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
   async (config) => {
     // Get token from cookie
-    const cookies = document.cookie.split(';');
-    const tokenCookie = cookies.find(cookie => cookie.trim().startsWith('token='));
-    const token = tokenCookie ? tokenCookie.split('=')[1] : null;
+    let token = null;
+    if (typeof document !== 'undefined') {
+      const cookies = document.cookie.split(';');
+      const tokenCookie = cookies.find(cookie => cookie.trim().startsWith('token='));
+      token = tokenCookie ? tokenCookie.split('=')[1] : null;
+    }
 
     // If token exists, add it to headers
     if (token) {
@@ -38,9 +41,12 @@ const fetchData = {
   get: async (url: string, params = {}) => {
     try {
       // Get token from cookie
-      const cookies = document.cookie.split(';');
-      const tokenCookie = cookies.find(cookie => cookie.trim().startsWith('token='));
-      const token = tokenCookie ? decodeURIComponent(tokenCookie.split('=')[1].trim()) : null;
+      let token = null;
+      if (typeof document !== 'undefined') {
+        const cookies = document.cookie.split(';');
+        const tokenCookie = cookies.find(cookie => cookie.trim().startsWith('token='));
+        token = tokenCookie ? decodeURIComponent(tokenCookie.split('=')[1].trim()) : null;
+      }
 
       const config = {
         params,
@@ -58,9 +64,12 @@ const fetchData = {
   post: async (url: string, data = {}) => {
     try {
       // Get token from cookie
-      const cookies = document.cookie.split(';');
-      const tokenCookie = cookies.find(cookie => cookie.trim().startsWith('token='));
-      const token = tokenCookie ? decodeURIComponent(tokenCookie.split('=')[1].trim()) : null;
+      let token = null;
+      if (typeof document !== 'undefined') {
+        const cookies = document.cookie.split(';');
+        const tokenCookie = cookies.find(cookie => cookie.trim().startsWith('token='));
+        token = tokenCookie ? decodeURIComponent(tokenCookie.split('=')[1].trim()) : null;
+      }
 
       const config = {
         headers: token ? { 'Authorization': `Bearer ${token}` } : {}
