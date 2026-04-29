@@ -223,16 +223,19 @@ resource "helm_release" "sonarqube" {
   name       = "sonarqube"
   repository = "https://SonarSource.github.io/helm-chart-sonarqube"
   chart      = "sonarqube"
-  version    = "10.4.1+2389"
+  version    = "2025.4.6"
   namespace  = kubernetes_namespace.sonarqube.metadata[0].name
+  timeout    = 600
 
   values = [
     <<-EOT
+    community:
+      enabled: true
+    monitoringPasscode: "{233310410117411710110521141002021001120220011511120211624312032112115114115}"
     service:
       type: LoadBalancer
     persistence:
       enabled: true
-      storageClass: ebs-sc
       size: 10Gi
     resources:
       requests:
