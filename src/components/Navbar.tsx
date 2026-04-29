@@ -95,7 +95,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="navbar px-default py-3 bg-secondary shadow-lg border-b sticky top-0 left-0 z-50">
+      <div className="navbar px-default py-3 bg-secondary/70 backdrop-blur-md shadow-lg border-b sticky top-0 left-0 z-50">
         <nav className="flex gap-6 items-center justify-between">
           <div className="left flex gap-6 items-center flex-1">
             <Logo />

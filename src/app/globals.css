@@ -6,14 +6,14 @@
 @layer base {
 
   :root {
-    --gradient: hsl(323, 100%, 50%);
+    --gradient: hsl(221, 83%, 53%);
     --background: 220, 14%, 96%;
     --foreground: 240 10% 3.9%;
     --card: 0 0% 100%;
     --card-foreground: 240 10% 3.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 240 10% 3.9%;
-    --primary: 323, 100%, 50%;
+    --primary: 221, 83%, 53%;
     --primary-foreground: 355.7 100% 97.3%;
     --secondary: 0, 0%, 100%;
     --secondary-foreground: 240 5.9% 10%;
@@ -42,8 +42,8 @@
     /* --popover: 224 71.4% 4.1%; */
     --popover: 193, 82%, 4%;
     --popover-foreground: 210 20% 98%;
-    --primary: 323, 100%, 50%;
-    --primary-foreground: 220.9 39.3% 11%;
+    --primary: 221, 83%, 53%;
+    --primary-foreground: 210 20% 98%;
     --secondary: 196, 75%, 8%;
     --secondary-foreground: 210 20% 98%;
     --muted: 215 27.9% 16.9%;
