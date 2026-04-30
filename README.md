@@ -503,12 +503,12 @@ kubectl get svc nginx-ingress-ingress-nginx-controller -n ingress-nginx -o jsonp
 |---|---|
 | ![Screenshot 9](./screenshots/screenshot-09.png) | 
 | ![Screenshot 11](./screenshots/screenshot-11.png) | ![Screenshot 12](./screenshots/screenshot-12.png) |
-| ![Screenshot 13](./screenshots/screenshot-13.png) | ![Screenshot 14](./screenshots/screenshot-14.png) |
+| ![Screenshot 13](./screenshots/screenshot-13.png) |
 | ![Screenshot 15](./screenshots/screenshot-15.png) | ![Screenshot 16](./screenshots/screenshot-16.png) |
 
 ---
 
 ## **Congratulations!** <br/>
-![CloudKart Website Screenshot](./public/Deployed.png)
+![CloudKart Website Screenshot](./screenshots/screenshot-14.png)
 
 ### Your project is now deployed.
