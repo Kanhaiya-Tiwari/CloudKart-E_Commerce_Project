@@ -500,11 +500,10 @@ kubectl get svc nginx-ingress-ingress-nginx-controller -n ingress-nginx -o jsonp
 | ![Screenshot 3](./screenshots/screenshot-03.png) | 
 ### 🔄 CI/CD Pipeline & DevOps
 | | |
-|---|---|
 | ![Screenshot 9](./screenshots/screenshot-09.png) | 
 | ![Screenshot 11](./screenshots/screenshot-11.png) | ![Screenshot 12](./screenshots/screenshot-12.png) |
 | ![Screenshot 13](./screenshots/screenshot-13.png) |
-| ![Screenshot 15](./screenshots/screenshot-15.png) | ![Screenshot 16](./screenshots/screenshot-16.png) |
+| ![Screenshot 15](./screenshots/screenshot-15.png) | 
 
 ---
 
