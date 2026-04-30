@@ -496,8 +496,7 @@ kubectl get svc nginx-ingress-ingress-nginx-controller -n ingress-nginx -o jsonp
 
 ### 🏠 Application UI
 | | |
-|---|---|
-| | ![Screenshot 2](./screenshots/screenshot-02.png) |
+| | ![Screenshot 2](./screenshots/screenshot-02.png) 
 | ![Screenshot 3](./screenshots/screenshot-03.png) | ![Screenshot 4](./screenshots/screenshot-04.png) |
 | ![Screenshot 5](./screenshots/screenshot-05.png) | ![Screenshot 6](./screenshots/screenshot-06.png) |
 | ![Screenshot 7](./screenshots/screenshot-07.png) | ![Screenshot 8](./screenshots/screenshot-08.png) |
@@ -505,7 +504,7 @@ kubectl get svc nginx-ingress-ingress-nginx-controller -n ingress-nginx -o jsonp
 ### 🔄 CI/CD Pipeline & DevOps
 | | |
 |---|---|
-| ![Screenshot 9](./screenshots/screenshot-09.png) | ![Screenshot 10](./screenshots/screenshot-10.png) |
+| ![Screenshot 9](./screenshots/screenshot-09.png) | 
 | ![Screenshot 11](./screenshots/screenshot-11.png) | ![Screenshot 12](./screenshots/screenshot-12.png) |
 | ![Screenshot 13](./screenshots/screenshot-13.png) | ![Screenshot 14](./screenshots/screenshot-14.png) |
 | ![Screenshot 15](./screenshots/screenshot-15.png) | ![Screenshot 16](./screenshots/screenshot-16.png) |
