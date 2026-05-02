@@ -183,7 +183,6 @@ sudo systemctl status jenkins
 >   - **Docker Pipeline**<br/>
 >   - **Pipeline View**
 
-
 #### 5. **Set Up Docker & GitHub Credentials in Jenkins (Global Credentials)**<br/>
 >
 > - GitHub Credentials:
