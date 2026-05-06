@@ -1,3 +1,10 @@
+# Project: CloudKart
+# File: ec2.tf
+# Description: Terraform infrastructure as code file.
+# How to use: Managed using terraform commands.
+# Why it exists: To automate AWS resource provisioning.
+# When it's used: During infrastructure deployment/updates.
+
 data "aws_ami" "os_image" {
   owners      = ["099720109477"]
   most_recent = true

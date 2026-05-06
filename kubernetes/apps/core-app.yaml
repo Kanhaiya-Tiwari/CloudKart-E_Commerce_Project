@@ -1,3 +1,10 @@
+# Project: CloudKart
+# File: core-app.yaml
+# Description: Kubernetes manifest file.
+# How to use: Applied to the cluster via 'kubectl apply' or ArgoCD.
+# Why it exists: To define desired state of K8s resources.
+# When it's used: During application deployment to EKS.
+
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:

@@ -1,3 +1,12 @@
+/**
+ * Project: CloudKart
+ * File: migrate-data.ts
+ * Description: TypeScript source code file.
+ * How to use: Part of the application logic.
+ * Why it exists: To implement features or utility functions.
+ * When it's used: During application execution.
+ */
+
 import { promises as fs } from 'fs';
 import path from 'path';
 import mongoose from 'mongoose';

@@ -1,3 +1,10 @@
+# Project: CloudKart
+# File: Dockerfile
+# Description: Multi-stage Dockerfile for building and running the CloudKart Next.js application.
+# How to use: Run 'docker build -t cloudkart .' to build the image.
+# Why it exists: To containerize the application for consistent deployment.
+# When it's used: In CI/CD pipelines and local production testing.
+
 # Stage 1: Development/Build Stage
 FROM node:18-alpine AS builder
 

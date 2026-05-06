@@ -1,3 +1,10 @@
+# Project: CloudKart
+# File: DEPLOY.sh
+# Description: Shell script for automation.
+# How to use: Run via './filename.sh'.
+# Why it exists: To automate repetitive tasks.
+# When it's used: During setup, deployment, or cleanup.
+
 #!/bin/bash
 
 # ============================================================

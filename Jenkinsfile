@@ -1,3 +1,10 @@
+# Project: CloudKart
+# File: Jenkinsfile
+# Description: CI/CD pipeline definition for Jenkins.
+# How to use: Automatically triggered by GitHub webhooks or manually in Jenkins.
+# Why it exists: To automate the build, test, and deployment process to EKS.
+# When it's used: On every code push to the repository.
+
 @Library('Shared') _
 
 pipeline {

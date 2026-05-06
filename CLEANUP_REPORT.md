@@ -1,3 +1,12 @@
+---
+Project: CloudKart
+File: CLEANUP_REPORT.md
+Description: Project file.
+How to use: Refer to the documentation.
+Why it exists: Part of the CloudKart ecosystem.
+When it's used: During various stages of the project lifecycle.
+---
+
 # ❌ Deleted Files & Folders - Cleanup Report
 
 ## Summary

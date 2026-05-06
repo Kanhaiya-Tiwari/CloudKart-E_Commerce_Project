@@ -1,3 +1,10 @@
+# Project: CloudKart
+# File: .gitignore
+# Description: Project file.
+# How to use: Refer to the documentation.
+# Why it exists: Part of the CloudKart ecosystem.
+# When it's used: During various stages of the project lifecycle.
+
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies

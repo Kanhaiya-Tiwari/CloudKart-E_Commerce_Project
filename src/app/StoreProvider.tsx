@@ -1,3 +1,12 @@
+/**
+ * Project: CloudKart
+ * File: StoreProvider.tsx
+ * Description: React component with TypeScript.
+ * How to use: Rendered as part of the UI.
+ * Why it exists: To build the frontend user interface.
+ * When it's used: In the browser during user interaction.
+ */
+
 "use client";
 import { useRef } from "react";
 import { Provider } from "react-redux";

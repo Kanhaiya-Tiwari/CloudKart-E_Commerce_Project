@@ -1,3 +1,12 @@
+---
+Project: CloudKart
+File: DEPLOYMENT_COMPLETE.md
+Description: Project file.
+How to use: Refer to the documentation.
+Why it exists: Part of the CloudKart ecosystem.
+When it's used: During various stages of the project lifecycle.
+---
+
 # ✅ CloudKart Terraform Infrastructure - Complete Setup Guide
 
 ## 🎯 Status: READY FOR DEPLOYMENT

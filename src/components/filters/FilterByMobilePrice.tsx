@@ -1,3 +1,12 @@
+/**
+ * Project: CloudKart
+ * File: FilterByMobilePrice.tsx
+ * Description: React component with TypeScript.
+ * How to use: Rendered as part of the UI.
+ * Why it exists: To build the frontend user interface.
+ * When it's used: In the browser during user interaction.
+ */
+
 import { useSearchParams, useRouter } from "next/navigation";
 import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { Button } from "../ui/button";

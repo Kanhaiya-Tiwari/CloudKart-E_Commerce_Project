@@ -1,3 +1,12 @@
+/**
+ * Project: CloudKart
+ * File: utils.ts
+ * Description: TypeScript source code file.
+ * How to use: Part of the application logic.
+ * Why it exists: To implement features or utility functions.
+ * When it's used: During application execution.
+ */
+
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { CartItem } from "./features/cart/cartSlice";

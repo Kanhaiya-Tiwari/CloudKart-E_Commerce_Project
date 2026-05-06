@@ -1,3 +1,12 @@
+/**
+ * Project: CloudKart
+ * File: ShippingAddressForm.tsx
+ * Description: React component with TypeScript.
+ * How to use: Rendered as part of the UI.
+ * Why it exists: To build the frontend user interface.
+ * When it's used: In the browser during user interaction.
+ */
+
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";

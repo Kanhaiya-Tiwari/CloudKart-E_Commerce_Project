@@ -1,3 +1,12 @@
+/**
+ * Project: CloudKart
+ * File: ProductImageSlider.tsx
+ * Description: React component with TypeScript.
+ * How to use: Rendered as part of the UI.
+ * Why it exists: To build the frontend user interface.
+ * When it's used: In the browser during user interaction.
+ */
+
 "use client";
 
 import React, { useState, useEffect, useCallback } from "react";

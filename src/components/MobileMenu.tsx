@@ -1,3 +1,12 @@
+/**
+ * Project: CloudKart
+ * File: MobileMenu.tsx
+ * Description: React component with TypeScript.
+ * How to use: Rendered as part of the UI.
+ * Why it exists: To build the frontend user interface.
+ * When it's used: In the browser during user interaction.
+ */
+
 import Logo from "@/assets/Logo";
 import { AnimatePresence, Variants, motion } from "framer-motion";
 import Link from "next/link";

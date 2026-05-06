@@ -1,3 +1,12 @@
+---
+Project: CloudKart
+File: JENKINS.md
+Description: Project file.
+How to use: Refer to the documentation.
+Why it exists: Part of the CloudKart ecosystem.
+When it's used: During various stages of the project lifecycle.
+---
+
 # Jenkins CI/CD Pipeline Setup Guide
 
 This guide provides step-by-step instructions for setting up a Jenkins CI/CD pipeline for the CloudKart application, including GitHub webhook configuration and shared library integration.

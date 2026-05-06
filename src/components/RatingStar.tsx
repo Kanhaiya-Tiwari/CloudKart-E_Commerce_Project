@@ -1,3 +1,12 @@
+/**
+ * Project: CloudKart
+ * File: RatingStar.tsx
+ * Description: React component with TypeScript.
+ * How to use: Rendered as part of the UI.
+ * Why it exists: To build the frontend user interface.
+ * When it's used: In the browser during user interaction.
+ */
+
 import { cn } from "@/lib/utils";
 import React from "react";
 import { MdOutlineStar, MdOutlineStarBorder } from "react-icons/md";

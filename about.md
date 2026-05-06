@@ -1,3 +1,12 @@
+---
+Project: CloudKart
+File: about.md
+Description: Project file.
+How to use: Refer to the documentation.
+Why it exists: Part of the CloudKart ecosystem.
+When it's used: During various stages of the project lifecycle.
+---
+
 # 🛍️ CloudKart - Modern E-commerce Platform
 
 [![Next.js](https://img.shields.io/badge/Next.js-14.1.0-black?style=flat-square&logo=next.js)](https://nextjs.org/)

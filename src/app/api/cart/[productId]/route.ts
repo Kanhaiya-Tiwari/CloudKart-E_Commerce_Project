@@ -1,3 +1,12 @@
+/**
+ * Project: CloudKart
+ * File: route.ts
+ * Description: TypeScript source code file.
+ * How to use: Part of the application logic.
+ * Why it exists: To implement features or utility functions.
+ * When it's used: During application execution.
+ */
+
 import { NextRequest, NextResponse } from 'next/server';
 import dbConnect from '@/lib/db';
 import Cart from '@/lib/models/cart';

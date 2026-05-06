@@ -1,3 +1,12 @@
+/**
+ * Project: CloudKart
+ * File: FilterByMobileColors.tsx
+ * Description: React component with TypeScript.
+ * How to use: Rendered as part of the UI.
+ * Why it exists: To build the frontend user interface.
+ * When it's used: In the browser during user interaction.
+ */
+
 import colors from "@/data/colors.json";
 import { toggleFilterOpen } from "@/lib/features/sidebar/sidebarSlice";
 import Image from "next/image";

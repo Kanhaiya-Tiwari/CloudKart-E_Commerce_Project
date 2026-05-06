@@ -1,3 +1,12 @@
+/**
+ * Project: CloudKart
+ * File: SingleProduct.tsx
+ * Description: React component with TypeScript.
+ * How to use: Rendered as part of the UI.
+ * Why it exists: To build the frontend user interface.
+ * When it's used: In the browser during user interaction.
+ */
+
 import { EmblaOptionsType } from "embla-carousel";
 import Link from "next/link";
 import AddToCartBtnWrapper from "./AddToCartWrapper";

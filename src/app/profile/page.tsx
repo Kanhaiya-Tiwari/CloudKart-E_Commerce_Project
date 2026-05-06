@@ -1,3 +1,12 @@
+/**
+ * Project: CloudKart
+ * File: page.tsx
+ * Description: React component with TypeScript.
+ * How to use: Rendered as part of the UI.
+ * Why it exists: To build the frontend user interface.
+ * When it's used: In the browser during user interaction.
+ */
+
 import ProfileForm from "@/components/forms/ProfileForm";
 import { Metadata } from "next";
 import React from "react";

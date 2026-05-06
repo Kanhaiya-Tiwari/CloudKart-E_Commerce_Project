@@ -1,3 +1,10 @@
+# Project: CloudKart
+# File: docker-compose.yml
+# Description: Docker Compose configuration for local multi-container development.
+# How to use: Run 'docker-compose up' to start the app and database.
+# Why it exists: To easily spin up the entire application stack locally.
+# When it's used: During local development.
+
 version: '3.8'
 
 services:

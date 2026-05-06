@@ -1,3 +1,10 @@
+# Project: CloudKart
+# File: 00-cluster-issuer.yml
+# Description: Configuration file in YAML format.
+# How to use: Used by various tools for configuration.
+# Why it exists: To specify settings for tools or services.
+# When it's used: During build or runtime.
+
 kind: ClusterIssuer
 apiVersion: cert-manager.io/v1
 
