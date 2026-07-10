@@ -139,6 +139,7 @@ terraform apply
 ```
 > Confirm with `yes` when prompted.
 
+
 7. **Access Your EC2 Instance;** <br/>
 After deployment, grab the public IP of your EC2 instance from the output or AWS Console, then connect using SSH:
 ```bash
