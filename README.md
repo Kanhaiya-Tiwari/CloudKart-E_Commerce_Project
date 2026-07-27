@@ -1,5 +1,5 @@
 
-Project: Cloud
+Project: 
 File: README.md
 Description: Main documentation file for the project.
 How to use: Read it to understand the project setup and deployment.
