@@ -1,10 +1,4 @@
 
-File: 
-Description: Main documentation file for the project.
-How to use: Read it to understand the project setup and deployment.
-Why it exists: To provide guidance to developers and users.
-When it's used: Whenever someone wants to learn about the project.
----
 
 # 🛍️ CloudKart - Modern E-commerce Platform with EKS
 
