@@ -81,7 +81,6 @@ unzip awscliv2.zip
 sudo ./aws/install
 ```
 
-
  ```aws configure```
 
 > #### This will prompt you to enter:<br/>
