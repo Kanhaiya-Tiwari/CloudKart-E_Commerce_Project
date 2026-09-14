@@ -1,5 +1,4 @@
 
-
 # 🛍️ CloudKart - Modern E-commerce Platform with EKS
 
 [![Next.js](https://img.shields.io/badge/Next.js-14.1.0-black?style=flat-square&logo=next.js)](https://nextjs.org/)
