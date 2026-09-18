@@ -35,6 +35,7 @@ resource "kubernetes_namespace" "cloudkart" {
   depends_on = [module.eks]
 }
 
+
 # ============================================================
 # INGRESS-NGINX
 # ============================================================
