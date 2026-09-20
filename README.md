@@ -98,7 +98,7 @@ sudo ./aws/install
 1. **Clone the Repository:**
 First, clone this repo to your local machine:<br/>
 ```bash
-git clone https://github.com/kanhaiyatiwari/cloudkart-app.git
+git clone https://github.com/Kanhaiya-Tiwari/CloudKart-E_Commerce_Project.git
 cd terraform
 ```
 2. **Generate SSH Key Pair:**
@@ -429,8 +429,8 @@ kubectl get svc nginx-ingress-ingress-nginx-controller -n ingress-nginx -o jsonp
 > >   NODE_ENV: "production"
 > >   NEXT_PUBLIC_API_URL: "https://cloudkart.letsdeployit.com/api"
 > >   NEXTAUTH_URL: "https://cloudkart.letsdeployit.com/"
-> >   NEXTAUTH_SECRET: "HmaFjYZ2jbUK7Ef+wZrBiJei4ZNGBAJ5IdiOGAyQegw="
-> >   JWT_SECRET: "e5e425764a34a2117ec2028bd53d6f1388e7b90aeae9fa7735f2469ea3a6cc8c"
+> >   NEXTAUTH_SECRET: "<set-a-strong-random-secret>"
+> >   JWT_SECRET: "<set-a-strong-random-secret>"
 > > ```
 
 > #### 2. **Update your manifests to enable HTTPS:**
