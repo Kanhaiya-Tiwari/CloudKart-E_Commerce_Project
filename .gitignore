@@ -33,9 +33,9 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
-# .env
-# .env.local
-# .env.*
+.env
+.env.local
+.env.*
 
 # vercel
 .vercel
@@ -78,9 +78,12 @@ Thumbs.db
 *.mongodb
 mongodb/
 
+# Terraform state, caches, and local credentials
 terraform/.terraform/*
 terraform/terra-key.pub
 terraform/terra-key
+terraform/cloudkart-key
+terraform/cloudkart-key.pub
 terraform/terraform.tfstate*
 terraform/.terraform.lock.hcl
 terraform/.terraform/modules/*
@@ -95,3 +98,5 @@ terraform/terraform.tfstate
 terraform/terraform.tfstate.backup
 terra-key.pub
 terra-key
+cloudkart-key
+cloudkart-key.pub
