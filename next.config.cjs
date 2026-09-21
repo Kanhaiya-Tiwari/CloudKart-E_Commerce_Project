@@ -1,10 +1,5 @@
 /**
- * Project: CloudKart
- * File: next.config.cjs
- * Description: Project file.
- * How to use: Refer to the documentation.
- * Why it exists: Part of the CloudKart ecosystem.
- * When it's used: During various stages of the project lifecycle.
+ * CloudKart Next.js config: keeps the app optimized for standalone deployment and JSON handling in production.
  */
 
 /** @type {import('next').NextConfig} */

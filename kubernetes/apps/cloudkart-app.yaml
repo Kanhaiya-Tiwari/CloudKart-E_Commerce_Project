@@ -1,9 +1,4 @@
-# Project: CloudKart
-# File: cloudkart-app.yaml
-# Description: Kubernetes manifest file.
-# How to use: Applied to the cluster via 'kubectl apply' or ArgoCD.
-# Why it exists: To define desired state of K8s resources.
-# When it's used: During application deployment to EKS.
+# Argo CD application for CloudKart: this syncs the repository's Kubernetes manifests into the cluster and keeps the app deployment aligned with Git.
 
 apiVersion: argoproj.io/v1alpha1
 kind: Application

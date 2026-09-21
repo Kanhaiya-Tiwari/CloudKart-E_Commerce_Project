@@ -1,9 +1,4 @@
-# Project: CloudKart
-# File: 08-cloudkart-deployment.yaml
-# Description: Kubernetes manifest file.
-# How to use: Applied to the cluster via 'kubectl apply' or ArgoCD.
-# Why it exists: To define desired state of K8s resources.
-# When it's used: During application deployment to EKS.
+# Main CloudKart application deployment: hosts the Next.js storefront in the cloudkart namespace and reads environment config from Kubernetes secrets and config maps.
 
 apiVersion: apps/v1
 kind: Deployment

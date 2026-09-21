@@ -1,9 +1,4 @@
-# Project: CloudKart
-# File: eks.tf
-# Description: Terraform infrastructure as code file.
-# How to use: Managed using terraform commands.
-# Why it exists: To automate AWS resource provisioning.
-# When it's used: During infrastructure deployment/updates.
+// CloudKart EKS cluster: provisioned with VPC integration, node groups, and storage add-ons required by the app and MongoDB workloads.
 
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"

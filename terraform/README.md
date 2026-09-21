@@ -1,11 +1,4 @@
----
-Project: CloudKart
-File: README.md
-Description: Main documentation file for the project.
-How to use: Read it to understand the project setup and deployment.
-Why it exists: To provide guidance to developers and users.
-When it's used: Whenever someone wants to learn about the project.
----
+<!-- CloudKart EKS Terraform infrastructure: provisions AWS networking, EKS, Jenkins, and the Kubernetes delivery stack for the storefront. -->
 
 # CloudKart EKS Terraform Infrastructure
 
@@ -168,7 +161,7 @@ terraform apply
 
 ### Monthly Costs (eu-west-1 region):
 - **EKS Cluster**: ~$73 (flat rate)
-- **EC2 Nodes**: 2x c7i-flex.large (SPOT) ≈ $50-100/month
+- **EKS Node Group**: 2x c7i-flex.large (SPOT) ≈ $50-100/month
 - **Jenkins EC2**: 1x c7i-flex.large ≈ $50-80/month
 - **Data Transfer**: ~$10-30/month
 - **Storage (EBS)**: ~$10-20/month

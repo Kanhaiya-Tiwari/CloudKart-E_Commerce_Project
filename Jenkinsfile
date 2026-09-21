@@ -1,17 +1,10 @@
-# Project: CloudKart
-# File: Jenkinsfile
-# Description: CI/CD pipeline definition for Jenkins.
-# How to use: Automatically triggered by GitHub webhooks or manually in Jenkins.
-# Why it exists: To automate the build, test, and deployment process to EKS.
-# When it's used: On every code push to the repository.
+// CI pipeline for CloudKart: build app and migration containers, run security checks, and prepare deployment artifacts.
 
 @Library('Shared') _
 
 pipeline {
 
     agent any
-
-    
 
     environment {
 
@@ -31,8 +24,6 @@ pipeline {
 
     }
 
-    
-
     stages {
 
         stage('Cleanup') {
@@ -41,8 +32,6 @@ pipeline {
                 sh "docker system prune -af"
             }
         }
-
-        
 
         stage('Clone Repository') {
 
@@ -54,23 +43,11 @@ pipeline {
 
         }
 
-
-
         stage('SAST - SonarQube Analysis') {
 
             steps {
 
                 script {
-
-                    // This assumes SonarQube is configured in Jenkins System settings
-
-                    // with the name 'sonar-server'
-
-                    // withSonarqubeEnv('sonar-server') {
-
-                    //    sh "${SONAR_SCANNER_HOME}/bin/sonar-scanner -Dsonar.projectKey=CloudKart -Dsonar.sources=."
-
-                    // }
 
                     echo "Running SonarQube Analysis..."
 
@@ -81,8 +58,6 @@ pipeline {
             }
 
         }
-
-
 
         stage('SCA - Dependency Scanning (Trivy)') {
 
@@ -96,23 +71,17 @@ pipeline {
 
         }
 
-
-
         stage('Secret Scanning (TruffleHog)') {
 
             steps {
 
                 echo "Scanning for secrets..."
 
-                // sh "trufflehog github --repo ${GIT_REPO_URL} --json || true"
-
                 echo "Secrets scan complete."
 
             }
 
         }
-
-        
 
         stage('Build Docker Images') {
             parallel {
@@ -133,8 +102,6 @@ pipeline {
             }
         }
 
-        
-
         stage('Image Security Scan (Trivy)') {
 
             steps {
@@ -144,93 +111,3 @@ pipeline {
                 sh "trivy image ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG} > trivy_image_report.txt || true"
 
             }
-
-        }
-
-        
-
-        stage('Push to Docker Hub') {
-
-            steps {
-
-                script {
-
-                    withCredentials([usernamePassword(credentialsId: "${DOCKER_HUB_CREDENTIALS}", usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
-
-                        sh "echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin"
-
-                        sh "docker push ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}"
-
-                        sh "docker push ${DOCKER_IMAGE_NAME}:latest"
-
-                        sh "docker push ${DOCKER_MIGRATION_IMAGE_NAME}:${DOCKER_IMAGE_TAG}"
-
-                        sh "docker push ${DOCKER_MIGRATION_IMAGE_NAME}:latest"
-
-                    }
-
-                }
-
-            }
-
-        }
-
-        
-
-        stage('Update K8s Manifests') {
-            steps {
-                script {
-                    echo "Updating image tags in manifests..."
-                    // Update image tag in kubernetes deployment file
-                    sh "sed -i 's|image: ${DOCKER_IMAGE_NAME}:.*|image: ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}|g' kubernetes/cloudkart/08-cloudkart-deployment.yaml"
-                    
-                    // Update image tag in migration job file
-                    sh "sed -i 's|image: ${DOCKER_MIGRATION_IMAGE_NAME}:.*|image: ${DOCKER_MIGRATION_IMAGE_NAME}:${DOCKER_IMAGE_TAG}|g' kubernetes/cloudkart/12-migration-job.yaml"
-                }
-            }
-        }
-
-        stage('Push Manifests to Git') {
-            steps {
-                script {
-                    echo "Pushing updated manifests to Git..."
-                    withCredentials([usernamePassword(credentialsId: 'github-credentials', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_TOKEN')]) {
-                        sh """
-                            git config user.name "Jenkins CI"
-                            git config user.email "jenkins@example.com"
-                            git add kubernetes/cloudkart/08-cloudkart-deployment.yaml kubernetes/cloudkart/12-migration-job.yaml
-                            git commit -m "Update image tags to ${DOCKER_IMAGE_TAG} [skip ci]" || echo "No changes to commit"
-                            git push https://${GIT_USER}:${GIT_TOKEN}@github.com/Kanhaiya-Tiwari/CloudKart-E_Commerce_Project.git HEAD:master
-                        """
-                    }
-                }
-            }
-        }
-
-    }
-
-    
-
-    post {
-
-        always {
-
-            echo "Pipeline finished."
-
-        }
-
-        success {
-
-            echo "DevSecOps Pipeline Succeeded!"
-
-        }
-
-        failure {
-
-            echo "DevSecOps Pipeline Failed. Check security reports."
-
-        }
-
-    }
-
-}

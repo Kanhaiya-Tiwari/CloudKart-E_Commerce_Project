@@ -1,11 +1,4 @@
-/**
- * Project: CloudKart
- * File: migrate-data.ts
- * Description: TypeScript source code file.
- * How to use: Part of the application logic.
- * Why it exists: To implement features or utility functions.
- * When it's used: During application execution.
- */
+// Migration utility for CloudKart: loads catalog JSON from .db and seeds normalized product documents into MongoDB.
 
 import { promises as fs } from 'fs';
 import path from 'path';
@@ -95,30 +88,3 @@ async function migrateData() {
         paddedId = (num + 1).toString().padStart(10, '0');
       }
       usedIds.add(paddedId);
-
-      // Fix image paths
-      const fixedImages = product.image.map((img: string) => 
-        getImagePath(img, product.shop_category)
-      );
-
-      return {
-        _id: paddedId,
-        originalId: paddedId,
-        ...product,
-        image: fixedImages
-      };
-    });
-
-    // Insert products
-    await Product.insertMany(products);
-    console.log(`Migrated ${products.length} products`);
-
-    console.log('Migration completed successfully');
-  } catch (error) {
-    console.error('Migration failed:', error);
-  } finally {
-    await mongoose.disconnect();
-  }
-}
-
-migrateData();

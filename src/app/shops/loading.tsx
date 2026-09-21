@@ -1,11 +1,4 @@
-/**
- * Project: CloudKart
- * File: loading.tsx
- * Description: React component with TypeScript.
- * How to use: Rendered as part of the UI.
- * Why it exists: To build the frontend user interface.
- * When it's used: In the browser during user interaction.
- */
+// Loading state for the shops catalog page while CloudKart fetches and renders product data.
 
 import React from "react";
 import LoaderDots from "@/components/loader/LoaderDots";
