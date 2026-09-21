@@ -1,9 +1,4 @@
-# Project: CloudKart
-# File: globals.css
-# Description: Project file.
-# How to use: Refer to the documentation.
-# Why it exists: Part of the CloudKart ecosystem.
-# When it's used: During various stages of the project lifecycle.
+/* Defines the global design tokens and shared styles used throughout the CloudKart application. */
 
 @tailwind base;
 @tailwind components;
