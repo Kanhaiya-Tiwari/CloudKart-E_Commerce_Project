@@ -1,0 +1,37 @@
+name: Daily Automated Commit
+
+on:
+  schedule:
+    # 11:00 AM IST -> 05:30 UTC
+    - cron: '30 5 * * *'
+  workflow_dispatch: {}
+
+concurrency:
+  group: daily-automated-commit
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  daily-commit:
+    name: Daily commit
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Ensure script is executable
+        run: |
+          chmod +x ./scripts/auto_daily_commit.sh || true
+
+      - name: Run automated daily commit script
+        env:
+          # Uses the built-in token; no extra secrets required
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          ./scripts/auto_daily_commit.sh
